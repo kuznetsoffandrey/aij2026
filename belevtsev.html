@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Андрей Белевцев — программа на AI Journey 2026</title>
+<style>
+:root{
+  --navy:#091d44; --navy-deep:#020b1f; --navy-card:#0e2050;
+  --teal:#27d3c5; --purple:#8740e6; --blue:#4559e9; --blue2:#3262f7;
+  --light:#f6f4ff; --light2:#eceafb; --ink:#0d1b3d; --muted:#6b7794;
+  --white:#fff;
+  --r:22px;
+  --font:"Inter","Segoe UI","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font); background:var(--light); color:var(--ink);
+  -webkit-font-smoothing:antialiased; line-height:1.5;
+}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero{
+  position:relative; overflow:hidden; background:var(--navy-deep);
+  color:var(--white); padding:44px 0 76px; border-radius:0 0 40px 40px;
+}
+.hero::before{
+  content:""; position:absolute; inset:-30% -10% auto auto; width:900px; height:900px;
+  background:radial-gradient(circle at 50% 50%, rgba(135,64,230,.55), rgba(69,89,233,.18) 45%, transparent 70%);
+  filter:blur(20px); pointer-events:none;
+}
+.hero::after{
+  content:""; position:absolute; left:-220px; bottom:-380px; width:820px; height:820px;
+  background:radial-gradient(circle at 50% 50%, rgba(39,211,197,.42), transparent 68%);
+  filter:blur(24px); pointer-events:none;
+}
+.hero .wrap{position:relative;z-index:2}
+.brand{display:flex;align-items:center;gap:14px;margin-bottom:52px}
+.brand .mark{
+  width:56px;height:56px;border-radius:16px;display:grid;place-items:center;
+  background:linear-gradient(135deg,#3262f7,#27d3c5);
+  font-weight:800;font-size:19px;letter-spacing:-.5px;color:#02101f;
+}
+.brand .txt{font-size:11px;line-height:1.35;color:#a9b9e0;letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+.hero h1{
+  font-size:clamp(30px,4.6vw,62px); line-height:1.06; letter-spacing:-1.8px; font-weight:800;
+  max-width:20ch;
+}
+.hero h1 .nm{white-space:nowrap;display:inline-block}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(100deg,#27d3c5,#4559e9 55%,#8740e6);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero .sub{
+  margin-top:22px;font-size:clamp(15px,1.7vw,19px);color:#b8c6e6;max-width:52ch;line-height:1.6;
+}
+.hero .meta{margin-top:30px;display:flex;flex-wrap:wrap;gap:10px}
+.chip{
+  font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:9px 16px;border-radius:999px;background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.13);color:#d6e0f6;
+}
+.chip.teal{background:rgba(39,211,197,.16);border-color:rgba(39,211,197,.4);color:var(--teal)}
+
+.statbar{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:56px;
+  background:rgba(255,255,255,.09);border-radius:20px;overflow:hidden;
+}
+.statbar div{background:rgba(9,29,68,.75);padding:22px 24px}
+.statbar b{display:block;font-size:34px;line-height:1;font-weight:800;letter-spacing:-1px;color:#fff}
+.statbar span{display:block;margin-top:8px;font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:#93a5cc;font-weight:600}
+.statbar div:nth-child(1) b{color:var(--teal)}
+.statbar div:nth-child(2) b{color:#8f7cf5}
+.statbar div:nth-child(3) b{color:#5b8dff}
+
+/* ── SECTION ──────────────────────────────────────── */
+section{padding:74px 0}
+.eyebrow{
+  font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:#7a86a8;margin-bottom:12px;
+}
+h2{font-size:clamp(26px,3.4vw,42px);letter-spacing:-1.2px;font-weight:800;line-height:1.1;color:var(--ink)}
+.lede{margin-top:14px;font-size:16px;color:var(--muted);max-width:62ch}
+
+/* ── ACTIVITY CARDS ───────────────────────────────── */
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+.act{
+  position:relative;border-radius:var(--r);background:#fff;padding:28px 26px 24px;
+  border:1px solid #e2dff5;cursor:pointer;overflow:hidden;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .3s;
+  box-shadow:0 2px 10px rgba(13,27,61,.04);
+}
+.act::before{
+  content:"";position:absolute;top:0;left:26px;right:26px;height:4px;border-radius:0 0 4px 4px;
+  background:var(--accent);transform:scaleX(.14);transform-origin:left;
+  transition:transform .45s cubic-bezier(.2,.8,.2,1);
+}
+.act:hover,.act.open{transform:translateY(-6px);box-shadow:0 22px 48px rgba(13,27,61,.14);border-color:#d3ccf0}
+.act:hover::before,.act.open::before{transform:scaleX(1)}
+.act .num{font-size:13px;font-weight:800;color:var(--accent);letter-spacing:.1em}
+.act .kind{
+  position:absolute;top:24px;right:24px;font-size:10px;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;padding:6px 12px;border-radius:999px;
+  background:var(--accent-soft);color:var(--accent-ink);
+}
+.act .when{margin-top:22px;font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.03em}
+.act h3{margin-top:10px;font-size:22px;line-height:1.18;letter-spacing:-.6px;font-weight:800}
+.act .role{margin-top:12px;font-size:13.5px;color:#5a6788;font-weight:600}
+.act .more{
+  margin-top:20px;padding-top:18px;border-top:1px dashed #e2dff5;
+  max-height:0;opacity:0;overflow:hidden;transition:max-height .5s cubic-bezier(.2,.8,.2,1),opacity .35s,padding-top .4s;
+}
+.act.open .more{max-height:460px;opacity:1}
+.act .more p{font-size:13.5px;color:#5f6b8b;line-height:1.62;margin-bottom:10px}
+.act .more .lbl{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:14px 0 6px}
+.act .toggle{
+  margin-top:16px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--accent);display:flex;align-items:center;gap:7px;
+}
+.act .toggle svg{transition:transform .4s}
+.act.open .toggle svg{transform:rotate(180deg)}
+
+/* ── TIMELINE ─────────────────────────────────────── */
+.tl-wrap{margin-top:40px;background:#fff;border-radius:var(--r);border:1px solid #e2dff5;padding:30px 30px 24px;overflow:hidden}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.tab{
+  border:1px solid #e2dff5;background:#fff;color:#5a6788;font-family:var(--font);
+  font-size:12.5px;font-weight:700;padding:9px 18px;border-radius:999px;cursor:pointer;
+  transition:.25s;letter-spacing:.02em;
+}
+.tab:hover{background:#f4f2ff;color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.tab .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--teal);margin-right:8px;vertical-align:1px}
+
+.day{display:none}
+.day.active{display:block;animation:fade .45s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.slot{
+  display:grid;grid-template-columns:96px 1fr auto;gap:18px;align-items:center;
+  padding:14px 16px;border-radius:14px;margin-bottom:6px;
+  transition:background .25s,transform .25s;border-left:4px solid transparent;
+}
+.slot:hover{background:#f7f6ff;transform:translateX(3px)}
+.slot .time{font-size:13px;font-weight:700;color:#8b95b0;font-variant-numeric:tabular-nums}
+.slot .t{font-size:15px;font-weight:600;color:#243358;line-height:1.35}
+.slot .who{font-size:12px;color:#8b95b0;margin-top:3px}
+.slot .tag{
+  font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  padding:5px 11px;border-radius:999px;background:#f0eefb;color:#7a86a8;white-space:nowrap;
+}
+.slot.his{background:linear-gradient(90deg,rgba(39,211,197,.13),rgba(39,211,197,.03));border-left-color:var(--teal)}
+.slot.his .time{color:#149e94}
+.slot.his .t{font-weight:800;color:var(--navy)}
+.slot.his .tag{background:var(--teal);color:#02181a}
+
+/* ── ROLES ────────────────────────────────────────── */
+.roles{display:grid;gap:16px;margin-top:40px}
+.role-row{
+  display:grid;grid-template-columns:200px 1fr;gap:28px;align-items:start;
+  background:#fff;border-radius:18px;padding:26px 28px;border:1px solid #e2dff5;
+  transition:.3s;position:relative;overflow:hidden;
+}
+.role-row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c)}
+.role-row:hover{border-color:#d3ccf0;box-shadow:0 14px 34px rgba(13,27,61,.09)}
+.role-row h4{font-size:15px;font-weight:800;letter-spacing:-.2px;color:var(--c)}
+.role-row h4 small{display:block;font-size:11px;font-weight:700;color:#98a2bc;letter-spacing:.09em;text-transform:uppercase;margin-top:5px}
+.role-row p{font-size:14.5px;color:#54628a;line-height:1.65}
+
+/* ── MEMBERS ──────────────────────────────────────── */
+.mem{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:36px}
+.mcard{
+  background:#fff;border:1px solid #e2dff5;border-radius:16px;padding:20px;
+  display:flex;gap:14px;align-items:center;transition:.3s;
+}
+.mcard:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(13,27,61,.1)}
+.mcard.him{background:linear-gradient(135deg,#0b1d43,#132a5e);border-color:transparent;color:#fff}
+.av{
+  width:44px;height:44px;border-radius:14px;flex:0 0 44px;display:grid;place-items:center;
+  font-weight:800;font-size:15px;background:#efecfc;color:#6b57c8;letter-spacing:-.5px;
+}
+.mcard.him .av{background:linear-gradient(135deg,#27d3c5,#4559e9);color:#04121f}
+.mcard .nm{font-size:14px;font-weight:800;letter-spacing:-.2px;line-height:1.25}
+.mcard .og{font-size:11.5px;color:#8b95b0;margin-top:3px;line-height:1.35}
+.mcard.him .og{color:#a9b9e0}
+
+/* ── NOTE / SOURCE ────────────────────────────────── */
+.note{
+  margin-top:44px;background:linear-gradient(135deg,#0b1d43,#101f4a);color:#fff;
+  border-radius:var(--r);padding:34px 34px 30px;position:relative;overflow:hidden;
+}
+.note::after{
+  content:"";position:absolute;right:-140px;top:-160px;width:420px;height:420px;
+  background:radial-gradient(circle,rgba(135,64,230,.5),transparent 68%);filter:blur(18px);
+}
+.note h3{position:relative;font-size:19px;font-weight:800;letter-spacing:-.4px;margin-bottom:16px;z-index:2}
+.note p{position:relative;font-size:13.5px;color:#b3c1e2;line-height:1.7;margin-bottom:11px;z-index:2;max-width:78ch;overflow-wrap:anywhere}
+.note code{
+  font-family:"SF Mono",Consolas,monospace;font-size:12px;background:rgba(255,255,255,.1);
+  padding:2px 7px;border-radius:6px;color:#9de9e1;overflow-wrap:anywhere;word-break:break-word;
+}
+.note .warn{color:#ffd479;font-weight:700}
+
+footer{padding:46px 0 60px;color:#8b95b0;font-size:12.5px;text-align:center;line-height:1.7}
+
+@media(max-width:1000px){
+  .acts{grid-template-columns:1fr}
+  .statbar{grid-template-columns:repeat(2,1fr)}
+  .role-row{grid-template-columns:1fr;gap:12px}
+}
+@media(max-width:620px){
+  .wrap{padding:0 18px}
+  .hero{padding:30px 0 54px;border-radius:0 0 28px 28px}
+  section{padding:52px 0}
+  .slot{grid-template-columns:74px 1fr;gap:12px}
+  .slot .tag{grid-column:2;justify-self:start;margin-top:4px}
+  .statbar b{font-size:26px}
+  .tl-wrap{padding:22px 16px}
+  .note{padding:26px 22px}
+}
+</style>
+<style id="nojs-note-style">.nojs-note{position:fixed;left:0;right:0;bottom:0;z-index:300;background:#2b1a00;color:#ffd479;font:600 13px/1.4 -apple-system,"Segoe UI",Arial,sans-serif;padding:10px 16px;padding-bottom:calc(10px + env(safe-area-inset-bottom));text-align:center;border-top:1px solid rgba(255,212,121,.35)}</style>
+<noscript><div class="nojs-note">Похоже, JavaScript отключён (так бывает у встроенного просмотрщика Telegram). Открой этот адрес в Safari / Chrome — тогда работают вкладки, ползунок и режим презентации.</div></noscript>
+<style id="jssafe">
+  html:not(.js) .act .more{max-height:none!important;opacity:1!important;padding-top:18px!important;border-top-color:#e2dff5!important}
+  html:not(.js) .day{display:block!important;animation:none!important}
+  html:not(.js) .tabs,html:not(.js) .scrubwrap,html:not(.js) .pres,html:not(.js) .topbar{display:none!important}
+  html:not(.js) *{animation:none!important}
+</style>
+<style id="touchpolish">
+  html{-webkit-text-size-adjust:100%}
+  a,button,.act,.act .toggle,.tab,.tabh,.goto,.btn-pres{-webkit-tap-highlight-color:rgba(39,211,197,.18);touch-action:manipulation}
+  .act .toggle{cursor:pointer}
+</style><script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark">AIJ</div>
+      <div class="txt">Путешествие в мир<br>искусственного интеллекта</div>
+    </div>
+    <h1>Программа <span class="nm"><em>Андрея&nbsp;Белевцева</em></span><br>на AI&nbsp;Journey&nbsp;2026</h1>
+    <p class="sub">Три активности за два дня: собственный доклад на Главной сцене, панельная сессия Альянса в сфере ИИ и открытие научного дня.</p>
+    <div class="meta">
+      <span class="chip teal">26–28 ноября 2026</span>
+      <span class="chip">Москва · Кутузовский, 32</span>
+      <span class="chip">3 активности · 2 дня</span>
+    </div>
+
+    <div class="statbar">
+      <div><b>3</b><span>участия</span></div>
+      <div><b>2</b><span>дня</span></div>
+      <div><b>2ч 05м</b><span>на сцене</span></div>
+      <div><b>1</b><span>главная сцена</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="acts">
+  <div class="wrap">
+    <div class="eyebrow">Что у него в программе</div>
+    <h2>Три активности — три разные роли</h2>
+    <p class="lede">Все три — на Главной сцене. Нажмите на карточку, чтобы раскрыть детали.</p>
+
+    <div class="acts">
+      <article class="act" style="--accent:#0f9e93;--accent-soft:rgba(39,211,197,.16);--accent-ink:#0b6f68" tabindex="0">
+        <div class="num">01</div>
+        <div class="kind">Доклад</div>
+        <div class="when">27 ноября · 12:40–13:10 · 30 мин</div>
+        <h3>ИИ-решения Сбера</h3>
+        <div class="role">Единственный спикер</div>
+        <div class="more">
+          <div class="lbl">Формат</div>
+          <p>Keynote Talks · GenAI. Полностью его слот: полчаса на Главной сцене без со-спикеров и модератора.</p>
+          <div class="lbl">Где в дне</div>
+          <p>Третий по счёту в блоке «Сбер»: после открытия дня и keynote иностранных лидеров, перед анонсом нового поколения моделей Сбера.</p>
+          <div class="lbl">Что это значит</div>
+          <p>Витрина технологического блока — то, что компания показывает рынку как собственные ИИ-решения.</p>
+        </div>
+        <div class="toggle">Подробнее
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4.5L6 8.5L10 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </article>
+
+      <article class="act" style="--accent:#7a2fd0;--accent-soft:rgba(135,64,230,.14);--accent-ink:#5f22a8" tabindex="0">
+        <div class="num">02</div>
+        <div class="kind">Панель</div>
+        <div class="when">27 ноября · 17:20–18:35 · 75 мин</div>
+        <h3>Сессия Альянса в сфере ИИ</h3>
+        <div class="role">Участник, один из пяти</div>
+        <div class="more">
+          <div class="lbl">Тема</div>
+          <p>«ИИ-агенты переделят рынки? Будущее конкуренции и прибыли».</p>
+          <div class="lbl">Кто на сцене</div>
+          <p>Пять конкурирующих экосистем: VK, Альфа-Банк, Сбер, Яндекс, Т-Технологии. Александр Ведяхин (Сбер) — единственный спикер на уровне сессии; остальные четверо и Белевцев — во вложенном блоке панели. Роль модератора сайт не подписывает.</p>
+          <div class="lbl">Его роль здесь</div>
+          <p>Позиция Сбера в борьбе за агентный рынок. Это не доклад, а спор о том, кому достанутся прибыли агентной эпохи.</p>
+        </div>
+        <div class="toggle">Подробнее
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4.5L6 8.5L10 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </article>
+
+      <article class="act" style="--accent:#2a4fe0;--accent-soft:rgba(50,98,247,.13);--accent-ink:#2039b8" tabindex="0">
+        <div class="num">03</div>
+        <div class="kind">Открытие</div>
+        <div class="when">28 ноября · 10:00–10:20 · 20 мин</div>
+        <h3>Открытие дня</h3>
+        <div class="role">Один из двух</div>
+        <div class="more">
+          <div class="lbl">Формат</div>
+          <p>Открытие научного трека · AIforScience · FutureAI.</p>
+          <div class="lbl">С кем</div>
+          <p>Вместе с Дмитрием Чернышенко, заместителем Председателя Правительства.</p>
+          <div class="lbl">Что это значит</div>
+          <p>Формально короткий слот, но статусно — открытие целого дня на уровне государства и компании. Задаёт рамку всему научному треку.</p>
+        </div>
+        <div class="toggle">Подробнее
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4.5L6 8.5L10 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section style="background:#efedfb;border-radius:40px 40px 0 0">
+  <div class="wrap">
+    <div class="eyebrow">Календарь</div>
+    <h2>Два дня, три выхода</h2>
+    <p class="lede">Программа Главной сцены целиком — чтобы видеть, в каком окружении стоит каждый его слот.</p>
+
+    <div class="tl-wrap">
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" aria-selected="true" data-day="d27"><span class="dot"></span>27 ноября · Бизнес</button>
+        <button class="tab" role="tab" aria-selected="false" data-day="d28"><span class="dot" style="background:#4559e9"></span>28 ноября · Наука</button>
+      </div>
+
+      <div class="day active" id="d27">
+        <div class="slot"><div class="time">10:00<br><span style="font-weight:500;font-size:11px">10:20</span></div><div><div class="t">Открытие дня</div><div class="who">Максим Орешкин, Александр Ведяхин</div></div><div class="tag">Открытие</div></div>
+        <div class="slot"><div class="time">10:30<br><span style="font-weight:500;font-size:11px">11:30</span></div><div><div class="t">Деловой форум по ИИ стран БРИКС+ 2026</div></div><div class="tag">Форум</div></div>
+        <div class="slot"><div class="time">11:40<br><span style="font-weight:500;font-size:11px">12:30</span></div><div><div class="t">Keynote-выступления иностранных ИИ-лидеров</div></div><div class="tag">Keynote</div></div>
+        <div class="slot his"><div class="time">12:40<br><span style="font-weight:500;font-size:11px">13:10</span></div><div><div class="t">ИИ-решения Сбера</div><div class="who">Андрей Белевцев — единственный спикер</div></div><div class="tag">Его доклад</div></div>
+        <div class="slot"><div class="time">13:10<br><span style="font-weight:500;font-size:11px">13:40</span></div><div><div class="t">Новое поколение фундаментальных генеративных моделей Сбера</div></div><div class="tag">Анонс</div></div>
+        <div class="slot"><div class="time">13:40<br><span style="font-weight:500;font-size:11px">13:50</span></div><div><div class="t">Бренды в агентную эпоху: вызов принят</div><div class="who">Владислав Крейнин</div></div><div class="tag">Talk</div></div>
+        <div class="slot"><div class="time">13:50<br><span style="font-weight:500;font-size:11px">17:10</span></div><div><div class="t">Keynote-выступления российских ИИ-лидеров</div></div><div class="tag">Keynote</div></div>
+        <div class="slot his"><div class="time">17:20<br><span style="font-weight:500;font-size:11px">18:35</span></div><div><div class="t">Сессия Альянса в сфере ИИ: «ИИ-агенты переделят рынки? Будущее конкуренции и прибыли»</div><div class="who">А. Ведяхин (Сбер) — спикер сессии · Белевцев и ещё четверо — в панели</div></div><div class="tag">Его сессия</div></div>
+        <div class="slot"><div class="time">19:00<br><span style="font-weight:500;font-size:11px">20:15</span></div><div><div class="t">Церемония награждения «Лидеры ИИ»</div></div><div class="tag">Церемония</div></div>
+      </div>
+
+      <div class="day" id="d28">
+        <div class="slot his"><div class="time">10:00<br><span style="font-weight:500;font-size:11px">10:20</span></div><div><div class="t">Открытие дня</div><div class="who">Дмитрий Чернышенко, Андрей Белевцев</div></div><div class="tag">Открытие дня</div></div>
+        <div class="slot"><div class="time">10:30<br><span style="font-weight:500;font-size:11px">12:00</span></div><div><div class="t">Наука для ИИ: на фронтире AGI</div></div><div class="tag">Дискуссия</div></div>
+        <div class="slot"><div class="time">12:10<br><span style="font-weight:500;font-size:11px">12:55</span></div><div><div class="t">NextGenAI: что определит следующее поколение ИИ</div></div><div class="tag">Дискуссия</div></div>
+        <div class="slot"><div class="time">13:05<br><span style="font-weight:500;font-size:11px">16:35</span></div><div><div class="t">Презентации российских и международных ИИ-технологий</div></div><div class="tag">Презентации</div></div>
+        <div class="slot"><div class="time">16:45<br><span style="font-weight:500;font-size:11px">17:30</span></div><div><div class="t">Церемония награждения победителей AIJ Contest и AI Challenge</div></div><div class="tag">Церемония</div></div>
+        <div class="slot"><div class="time">17:40<br><span style="font-weight:500;font-size:11px">18:40</span></div><div><div class="t">От суверенного ИИ — к ИИ-творцу, понимающему русскую душу</div></div><div class="tag">Дискуссия</div></div>
+        <div class="slot"><div class="time">19:00<br><span style="font-weight:500;font-size:11px">20:00</span></div><div><div class="t">Церемония награждения AI Creative Awards</div></div><div class="tag">Церемония</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Что из этого следует</div>
+    <h2>Три роли, а не три выступления</h2>
+
+    <div class="roles">
+      <div class="role-row" style="--c:#0f9e93">
+        <h4>Докладчик<small>27.11 · 12:40</small></h4>
+        <p>У него есть собственный слот на 30 минут — единственная активность, где он говорит от начала до конца сам. Это про продукт и технологический суверенитет блока.</p>
+      </div>
+      <div class="role-row" style="--c:#7a2fd0">
+        <h4>Переговорщик<small>27.11 · 17:20</small></h4>
+        <p>Панель Альянса ставит его лицом к лицу с четырьмя конкурентами. Здесь он не презентует, а спорит — и это площадка позиции, а не отчёта.</p>
+      </div>
+      <div class="role-row" style="--c:#2a4fe0">
+        <h4>Представитель<small>28.11 · 10:00</small></h4>
+        <p>Открытие научного дня вместе с вице-премьером — роль компании на уровне государственной повестки, а не отдельного продукта.</p>
+      </div>
+    </div>
+
+    <div class="eyebrow" style="margin-top:64px">Окружение</div>
+    <h2 style="font-size:clamp(22px,2.6vw,32px)">С кем он делит сцену</h2>
+    <div class="mem">
+      <div class="mcard him"><div class="av">АБ</div><div><div class="nm">Андрей Белевцев</div><div class="og">Старший вице-президент, Сбер</div></div></div>
+      <div class="mcard"><div class="av">АВ</div><div><div class="nm">Александр Ведяхин</div><div class="og">Первый зампред Правления, Сбер · ведёт панель</div></div></div>
+      <div class="mcard"><div class="av">ДЧ</div><div><div class="nm">Дмитрий Чернышенко</div><div class="og">Заместитель Председателя Правительства РФ</div></div></div>
+      <div class="mcard"><div class="av">ВК</div><div><div class="nm">Владимир Кириенко</div><div class="og">VK</div></div></div>
+      <div class="mcard"><div class="av">ВВ</div><div><div class="nm">Владимир Верхошинский</div><div class="og">Альфа-Банк</div></div></div>
+      <div class="mcard"><div class="av">ДМ</div><div><div class="nm">Дмитрий Масюк</div><div class="og">Яндекс</div></div></div>
+      <div class="mcard"><div class="av">СБ</div><div><div class="nm">Станислав Близнюк</div><div class="og">Т-Технологии</div></div></div>
+      <div class="mcard"><div class="av">МО</div><div><div class="nm">Максим Орешкин</div><div class="og">Заместитель Руководителя Администрации Президента</div></div></div>
+    </div>
+
+    <div class="note">
+      <h3>Откуда цифры</h3>
+      <p>Источник — официальная программа на <b>aij.ru</b>. Сайт отдаёт расписание через собственный API <code>/proxy/services/dictionary/shared/api/v2/schedule/period/20</code>, который выгружен целиком: 100 сессий, 3 дня, 12 залов.</p>
+      <p>Фильтр — вхождение в список спикеров сессии, включая вложенные панели. Найдено три вхождения, все — «Андрей Белевцев». На 26 ноября и в треках Junior / Deep Dive / Contest / ESG его нет.</p>
+      <p>Описаний и аннотаций у этих трёх карточек на сайте <b>нет</b> — тезисы докладов не опубликованы. Всё сказанное о содержании — вывод из названия, формата и окружения слота, а не цитата.</p>
+      <p><span class="warn">Программа живая:</span> карточки правились вплоть до 23 ноября (последняя — в 22:18 МСК). Перед презентацией стоит перепроверить — слоты могли сдвинуться.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Собрано 23 ноября 2026 · срез официальной программы AI Journey 2026<br>
+  Данные: aij.ru
+</footer>
+
+<script>
+document.querySelectorAll('.act').forEach(function(card){
+  function toggle(){ card.classList.toggle('open'); }
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); }
+  });
+});
+
+document.querySelectorAll('.tab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    document.querySelectorAll('.tab').forEach(function(t){ t.setAttribute('aria-selected','false'); });
+    tab.setAttribute('aria-selected','true');
+    document.querySelectorAll('.day').forEach(function(d){ d.classList.remove('active'); });
+    var el = document.getElementById(tab.dataset.day);
+    if(el) el.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
